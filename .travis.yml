@@ -13,3 +13,12 @@ after_sucess:
   - docker build -t hootielander/multi-nginx ./nginx
   - docker build -t hootielander/multi-server ./server
   - docker build -t hootielander/multi-worker ./worker
+
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+  # Take those images and push them to the Docker hub
+  - docker push hootielander/multi-client
+  - docker push hootielander/multi-nginx
+  - docker push hootielander/multi-server
+  - docker push hootielander/multi-worker
