@@ -1,5 +1,6 @@
-language: generic 
 sudo: required
+language: generic
+
 services:
   - docker
 
@@ -9,16 +10,14 @@ before_install:
 script:
   - docker run -e CI=true hootielander/react-test npm test
 
-after_sucess:
+after_success:
   - docker build -t hootielander/multi-client ./client
   - docker build -t hootielander/multi-nginx ./nginx
   - docker build -t hootielander/multi-server ./server
   - docker build -t hootielander/multi-worker ./worker
-
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-
-  # Take those images and push them to the Docker hub
+  # Take those images and push them to docker hub
   - docker push hootielander/multi-client
   - docker push hootielander/multi-nginx
   - docker push hootielander/multi-server
