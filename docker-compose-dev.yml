@@ -15,7 +15,7 @@ services:
       dockerfile: Dockerfile.dev
       context: ./nginx
     ports:
-      - "3050:80"
+      - "3050:80" # if you visit port 3050 from the local -> this will redirect to 80
   api:
     build:
       dockerfile: Dockerfile.dev
